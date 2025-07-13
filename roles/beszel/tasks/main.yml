@@ -1,0 +1,26 @@
+---
+- name: Create Beszel application directory
+  ansible.builtin.file:
+    path: /opt/beszel
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: Create beszel_data directory
+  ansible.builtin.file:
+    path: /var/lib/beszel_data
+    state: directory
+    mode: '0755'
+    owner: fs
+    group: fs
+
+- name: Deploy Beszel Docker Compose file
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: /opt/beszel/docker-compose.yml
+
+- name: Start Beszel container
+  community.docker.docker_compose_v2:
+    project_src: /opt/beszel/
+    state: present

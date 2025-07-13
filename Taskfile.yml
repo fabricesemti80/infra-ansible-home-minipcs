@@ -1,0 +1,19 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+    - clear
+    - task --list-all
+
+  install-roles:
+    cmds:
+    - ansible-galaxy install -r requirements.yml
+
+  dry-run-deploy:
+    cmds:
+    - ansible-playbook site.yml -K --check --diff
+
+  deploy:
+    cmds:
+    - ansible-playbook site.yml -K

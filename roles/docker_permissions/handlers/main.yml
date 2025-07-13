@@ -1,0 +1,4 @@
+---
+- name: Reload user groups
+  ansible.builtin.command: newgrp docker
+  listen: Reload user groups

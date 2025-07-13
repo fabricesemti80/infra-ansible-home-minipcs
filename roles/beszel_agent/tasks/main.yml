@@ -1,0 +1,18 @@
+---
+- name: Create Beszel agent application directory
+  ansible.builtin.file:
+    path: /opt/beszel-agent
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: Deploy Beszel Agent Docker Compose file
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: /opt/beszel-agent/docker-compose.yml
+
+- name: Start Beszel Agent container
+  community.docker.docker_compose_v2:
+    project_src: /opt/beszel-agent/
+    state: present

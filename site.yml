@@ -3,5 +3,9 @@
   hosts: all
   become: true
   roles:
-  - common
-  - network_config
+  - role: common
+  - role: network_config
+  - role: geerlingguy.docker
+  - role: docker_permissions
+  - role: beszel
+  - role: beszel_agent
