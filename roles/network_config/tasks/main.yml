@@ -1,0 +1,11 @@
+---
+- name: Configure network interface
+  ansible.builtin.template:
+    src: 01-netcfg.yaml.j2
+    dest: /etc/netplan/01-netcfg.yaml
+  notify: Restart network
+
+- name: Restart and wait for server to come back online
+  ansible.builtin.wait_for_connection:
+    delay: 10
+    timeout: 300

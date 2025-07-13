@@ -1,0 +1,7 @@
+---
+- name: Apply common configurations
+  hosts: all
+  become: true
+  roles:
+  - common
+  - network_config

@@ -1,0 +1,20 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp3s0:
+      dhcp4: no
+      addresses: [{{ new_ip_address }}/24]
+      routes:
+        - to: default
+          via: {{ gateway_ip }}
+      nameservers:
+        addresses: [{{ dns_server1 }}, {{ dns_server2 }}]
+    enp0s31f6:
+      dhcp4: no
+      addresses: [{{ new_ip_address }}/24]
+      routes:
+        - to: default
+          via: {{ gateway_ip }}
+      nameservers:
+        addresses: [{{ dns_server1 }}, {{ dns_server2 }}]
