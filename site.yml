@@ -9,3 +9,4 @@
   - role: docker_permissions
   - role: beszel
   - role: beszel_agent
+  - role: tailscale

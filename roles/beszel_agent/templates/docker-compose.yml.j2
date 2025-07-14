@@ -11,4 +11,4 @@ services:
       # - /mnt/disk/.beszel:/extra-filesystems/sda1:ro
     environment:
       LISTEN: 45876
-      KEY: "{{ beszel_agent_key }}"
+      KEY: "{{ lookup('env', 'BESZEL_AGENT_KEY') }}"
