@@ -17,9 +17,19 @@ services:
     environment:
       - TS_AUTHKEY={{ lookup('env', 'TAILSCALE_AUTH_KEY') }}
       - TS_HOSTNAME={{ ansible_hostname }}
-      - TS_EXTRA_ARGS=--ssh --advertise-exit-node --accept-routes
+      - TS_ROUTES=192.168.0.0/16,10.0.0.0/8,172.16.0.0/12
+      - TS_EXTRA_ARGS=--ssh --advertise-exit-node --accept-routes --advertise-tags=tag:exit-node
       - TS_USERSPACE=false
       - TS_STATE_DIR=/var/lib/tailscale
-    # security_opts:
-    #   - "seccomp=unconfined"
+    healthcheck:
+      test: ["CMD", "tailscale", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     restart: unless-stopped
