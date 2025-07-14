@@ -9,7 +9,17 @@ services:
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv6.conf.all.forwarding=1
     environment:
       - TS_AUTHKEY={{ lookup('env', 'TAILSCALE_AUTH_KEY') }}
       - TS_HOSTNAME={{ ansible_hostname }}
+      - TS_EXTRA_ARGS=--ssh --advertise-exit-node --accept-routes
+      - TS_USERSPACE=false
+      - TS_STATE_DIR=/var/lib/tailscale
+    # security_opts:
+    #   - "seccomp=unconfined"
     restart: unless-stopped

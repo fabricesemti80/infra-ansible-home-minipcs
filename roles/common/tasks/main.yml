@@ -4,7 +4,11 @@
     update_cache: yes
     cache_valid_time: 43200 # 12 hours in seconds
     upgrade: dist
+  tags:
+  - common
 
 - name: Disable UFW
   ansible.builtin.ufw:
     state: disabled
+  tags:
+  - common

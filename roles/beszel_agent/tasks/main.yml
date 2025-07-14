@@ -6,13 +6,22 @@
     mode: '0755'
     owner: root
     group: root
+  tags:
+  - beszel_agent
+  - docker
 
 - name: Deploy Beszel Agent Docker Compose file
   ansible.builtin.template:
     src: docker-compose.yml.j2
     dest: /opt/beszel-agent/docker-compose.yml
+  tags:
+  - beszel_agent
+  - docker
 
 - name: Start Beszel Agent container
   community.docker.docker_compose_v2:
     project_src: /opt/beszel-agent/
     state: present
+  tags:
+  - beszel_agent
+  - docker

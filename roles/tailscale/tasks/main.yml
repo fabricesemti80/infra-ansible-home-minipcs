@@ -3,18 +3,26 @@
     path: /var/lib/tailscale
     state: directory
     mode: '0755'
+  tags:
+  - tailscale
 
 - name: Create Tailscale compose directory on remote
   ansible.builtin.file:
     path: /opt/tailscale
     state: directory
     mode: '0755'
+  tags:
+  - tailscale
+  - docker
 
 - name: Copy Tailscale Docker Compose file
   ansible.builtin.template:
     src: docker-compose.yml.j2
     dest: /opt/tailscale/docker-compose.yml
     mode: '0644'
+  tags:
+  - tailscale
+  - docker
 
 - name: Deploy Tailscale container
   community.docker.docker_compose_v2:
@@ -22,3 +30,6 @@
     files:
     - docker-compose.yml
     state: present
+  tags:
+  - tailscale
+  - docker
