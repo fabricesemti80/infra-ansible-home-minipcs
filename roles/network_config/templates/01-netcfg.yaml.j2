@@ -18,3 +18,11 @@ network:
           via: {{ gateway_ip }}
       nameservers:
         addresses: [{{ dns_server1 }}, {{ dns_server2 }}]
+    wlx98ba5f18f3ef:
+      dhcp4: no
+      addresses: [{{ secondary_ip_address }}/24]
+      routes:
+        - to: default
+          via: {{ gateway_ip }}
+      nameservers:
+        addresses: [{{ dns_server1 }}, {{ dns_server2 }}]

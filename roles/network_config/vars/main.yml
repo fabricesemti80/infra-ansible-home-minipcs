@@ -1,5 +1,6 @@
 ---
-new_ip_address: 10.0.20.200
+new_ip_address: 10.0.20.202
 gateway_ip: 10.0.20.1
 dns_server1: 10.0.20.1
 dns_server2: 1.1.1.1
+secondary_ip_address: 10.0.20.200
